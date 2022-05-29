@@ -39,38 +39,40 @@ router.get('/:id', (request, response) => {
     const product = getProductById(productsDB, id);
 
     if(!product){
-        response.status(404).json({"error": "Producto no encontrado"});
+        return response.status(404).json({"error": "Producto no encontrado"});
     }
 
     response.json(product);
 });
 
 router.post('/', checkSchema(productSchema), (request, response) => {
-    const id = getProductId(productsDB);
     const errors = validationResult(request);
 
     if (!errors.isEmpty()) {
         return response.status(400).json({errors: errors.array()});
     }
+    
+    const id = getProductId(productsDB);
 
     productsDB.push({id, ...request.body});
     response.status(200).json({success: true, message: 'Producto registrado', id});
 });
 
 router.put('/:id', checkSchema(productSchema), (request, response) => {
-    const {id} = request.params;
     const errors = validationResult(request);
 
     if (!errors.isEmpty()){
         return response.status(400).json({errors: errors.array()});
     }
 
-    const {title, price, thumbnail} = request.body;
+    const {id} = request.params;
     const product = getProductById(productsDB, id);
 
     if(!product){
-        response.status(404).json({"error": "Producto no encontrado"});
+        return response.status(404).json({"error": "Producto no encontrado"});
     }
+
+    const {title, price, thumbnail} = request.body;
 
     product.title = title;
     product.price = price;
@@ -84,7 +86,7 @@ router.delete('/:id', (request, response) => {
     const product = getProductById(productsDB, id);
 
     if(!product){
-        response.status(404).json({"error": "Producto no encontrado"});
+        return response.status(404).json({"error": "Producto no encontrado"});
     }
 
     productsDB = productsDB.filter(({id: productId}) => productId !== Number(id));
