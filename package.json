@@ -1,0 +1,24 @@
+{
+  "name": "express-products",
+  "version": "1.0.0",
+  "description": "",
+  "main": "application.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node application.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junior5783/express-products.git"
+  },
+  "author": "Junior Sanchez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/junior5783/express-products/issues"
+  },
+  "homepage": "https://github.com/junior5783/express-products#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-validator": "^6.14.1"
+  }
+}
